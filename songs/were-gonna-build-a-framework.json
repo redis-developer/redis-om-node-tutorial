@@ -1,0 +1,10 @@
+{
+  "title": "We’re Gonna Build a Framework",
+  "artist": "Dylan Beattie and the Linebreakers",
+  "genres": ["parody", "pop rock", "rock"],
+  "lyrics": "Handlebars, Hibernate, Solar, Activate,\\nPhalcon, Flask and Silverstripe and TYPO3 Flow,\\nAgavi, Pixie, Hazaar MVC,\\nCodeIgniter, Lithium and PRADO.\\n\\nRaphael, Bobo, Bottle and Tornado,\\nDjango, CherryPy and WSGI\\nGlashammer, WebSphere, RedBean, TurboGears,\\nAlbatross, Aquarium, Selenium, web.py\\n\\nCHORUS:\\n\\nWe’re gonna build a framework,\\n‘cos we wanna use one, but don’t wanna choose one,\\nWe’re gonna build a framework,\\nwe didn’t like the others, so we’ll write another…\\n\\nSiteCore, Tapestry, Maverick and JSP,\\nBarracuda, Ay Caramba, Groovy on Grails,\\nIntercal on Interstates, Cascade, NHibernate,\\nJDBC, Ruby on Rails\\nJasmine, Doctrine, Java Forms Engine,\\nActive Record, D3, Dapper and Velocity,\\nThymeleaf, TopLink, Pyramid, Rethync,\\nAura, Rico, Midori and Mojito,\\n\\nSitemesh, Cymbeline, Enterprise Java Beans,\\nHug, Grok, Boost, Click, anything by Telerik,\\nRango, Dojo, LLBLGen Pro,\\nCarbonado, Seaside, Pylons and Pyroxide\\n\\nFusebox, Flight, Flex, ServiceStack, Silex,\\nCarbon, Cocoa, Ample and Giotto,\\nBanshee, Symfony, Laravel, Fat Free,\\nMocha, Pecker, Hobo, Cuba and Rialto\\n\\nOpenRasta, Nancy, ASP net MVC,\\nKendo, Zend, ODBC and Tempo,\\nJava Server Faces, Entity Spaces,\\nCappuccino, SpecFlow, Polymer, JDO,\\nGoogle Web Toolkit, no need to learn Javascript,\\nJDK, code away, what else do I have to say?\\n\\nPrototype, Boilerplate, jQuery, animate,\\nMustache, Wijmo, Ionic and Allegro,\\nBootstrap, Backbone, running on an iPhone;\\nMobile apps, going live, built in HTML5\\nAngular, Scriptaculous, react, redux,\\nKnockout, ember, does anyone remember,\\nIt’s just like in the browser wars,\\nIExplore and Netscape 4,\\nlodash vs underscore,\\nand I can’t take it any more!",
+  "music": "\"We Didn’t Start The Fire\" by Billy Joel",
+  "year": 2016,
+  "duration": 247,
+  "link": "https://www.youtube.com/watch?v=Wm2h0cbvsw8"
+}

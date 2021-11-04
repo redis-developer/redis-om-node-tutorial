@@ -1,0 +1,19 @@
+{
+  "name": "metalpedia",
+  "version": "1.0.0",
+  "description": "Sample application for building an album repository backed by Redis and Redis OM",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Guy Royse <guy@guyroyse.com> (http://guyroyse.com/)",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1",
+    "redis-om": "^0.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}

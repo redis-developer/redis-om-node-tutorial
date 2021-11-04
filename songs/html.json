@@ -1,0 +1,10 @@
+{
+  "title": "HTML",
+  "artist": "Dylan Beattie and the Linebreakers",
+  "genres": ["blues rock", "hard rock", "parody", "rock"],
+  "lyrics": "W3C, RFC, a JIRA ticket and a style guide.\\nI deploy with FTP, run it all on the client side\\nDon’t need Ruby, don’t need Rails,\\nAin’t nothing running on my stack\\nI’m hard wired, for web scale,\\nYeah, I’m gonna bring the 90s back\\n\\nI’m shipping HTML,\\nHTML,\\nI’m shipping HTML,\\nHTML…\\n\\nNo logins, no trackers,\\nNo cookie banners to ignore\\nI ain’t afraid of, no hackers\\nJust the occasional 404\\nThey hatin’, what I do,\\nBut that’s ‘cos they don’t understand\\nMark it up, break it down,\\nRemember to escape your ampersands…\\n\\nI’m shipping HTML,\\nHTML,\\nI’m shipping HTML,\\nHTML…\\n\\n(But it’s really just markdown.)",
+  "music": "\"Highway to Hell\" by AC/DC",
+  "year": 2020,
+  "duration": 220,
+  "link": "https://www.youtube.com/watch?v=woKUEIJkwxI"
+}

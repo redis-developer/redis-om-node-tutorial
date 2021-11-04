@@ -1,0 +1,10 @@
+{
+  "title": "You Give ReST a Bad Name",
+  "artist": "Dylan Beattie and the Linebreakers",
+  "genres": ["hard rock", "parody", "pop rock", "rock"],
+  "lyrics": "This integration is going to hell,\\nYou promised me JSON, then sent XML,\\nYou say it works in a ReSTful way,\\nThen your errors come back as 200 OK\\n\\nWhoa, it’s no surprise,\\nMethod names in URIs,\\nYour data won’t even deserialize\\n\\nCHORUS:\\nYour API is a hall of shame,\\nYou give ReST a bad name,\\nIt falls apart, and we take the blame,\\nYou give ReST a bad name\\nYou give ReST… a bad name\\n\\nBroken methods, missing docs,\\nUpdates fail ‘cos of database locks,\\nBreaking changes, every time,\\nYour every release takes our system offline\\n\\nWhoa, it’s no surprise,\\nMethod names in URIs,\\nYour data won’t even deserialize\\n\\nCHORUS",
+  "music": "\"You Give Love a Bad Name\" by Bon Jovi",
+  "year": 2017,
+  "duration": 222,
+  "link": "https://www.youtube.com/watch?v=nSKp2StlS6s"
+}
