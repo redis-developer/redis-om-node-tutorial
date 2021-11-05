@@ -1,6 +1,5 @@
 import { Router } from 'express'
-
-import { songRepository as repository } from './song.js'
+import { songRepository as repository } from './song-repository.js'
 
 let router = Router()
 

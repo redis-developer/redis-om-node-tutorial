@@ -1,6 +1,6 @@
 import express from 'express'
-import songRouter from './lib/song-router.js'
-import songsRouter from './lib/songs-router.js'
+import songRouter from './song-router.js'
+import songsRouter from './songs-router.js'
 
 let app = new express()
 app.use(express.json())
