@@ -1,11 +1,18 @@
 import express from 'express'
-import rootRouter from './lib/routers/root-router.js'
-import songRouter from './lib/routers/song-router.js'
-import songsRouter from './lib/routers/songs-router.js'
+import songRouter from './lib/song-router.js'
+import songsRouter from './lib/songs-router.js'
 
 let app = new express()
 app.use(express.json())
-app.use('/', rootRouter)
 app.use('/song', songRouter)
 app.use('/songs', songsRouter)
+
+app.get('/', (req, res) => {
+  res.type('application/json')
+  res.send({
+    name: process.env.npm_package_name,
+    version: process.env.npm_package_version
+  })
+})
+
 app.listen(8080)

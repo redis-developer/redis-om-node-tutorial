@@ -1,7 +1,7 @@
 {
   "name": "metalpedia",
   "version": "1.0.0",
-  "description": "Sample application for building an album repository backed by Redis and Redis OM",
+  "description": "Sample application for building a music repository backed by Redis and Redis OM.",
   "type": "module",
   "scripts": {
     "start": "nodemon server.js"
