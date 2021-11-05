@@ -1,8 +1,7 @@
 import { Router } from 'express'
 import { songRepository as repository } from './song-repository.js'
 
-let router = Router()
-
+export let router = Router()
 
 router.get('/', async (req, res) => {
   let songs = await repository.search().returnAll()
@@ -33,5 +32,3 @@ router.get('/with-lyrics/:lyrics', async (req, res) => {
   let songs = await repository.search().where('lyrics').match(lyrics).returnAll()
   res.send(songs)
 })
-
-export default router

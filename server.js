@@ -1,18 +1,22 @@
 import express from 'express'
-import songRouter from './song-router.js'
-import songsRouter from './songs-router.js'
+import { router as songRouter } from './song-router.js'
+import { router as songsRouter } from './songs-router.js'
 
+// create an express app and use JSON
 let app = new express()
 app.use(express.json())
+
+// bring in some routers
 app.use('/song', songRouter)
 app.use('/songs', songsRouter)
 
+// setup the root level GET to return name and version from package.json
 app.get('/', (req, res) => {
-  res.type('application/json')
   res.send({
     name: process.env.npm_package_name,
     version: process.env.npm_package_version
   })
 })
 
+// start listening
 app.listen(8080)

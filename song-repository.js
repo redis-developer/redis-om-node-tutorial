@@ -18,29 +18,29 @@ class Song extends Entity {
       music: this.music,
       year: this.year,
       duration: this.duration,
-      durationString: this.durationString,
+      durationString: this.durationAsString,
       link: this.link
     }
   }
 }
 
 let schema = new Schema(Song, {
-  title: { type: 'string' },
-  artist: { type: 'string' },
-  genres: { type: 'array' },
-  lyrics: { type: 'string', textSearch: true },
-  music: { type: 'string', textSearch: true },
-  year: { type: 'number' },
-  duration: { type: 'number' },
-  link: { type: 'string' }
+  title: { type: 'string' },     // the title of the song
+  artist: { type: 'string' },    // who performed the song
+  genres: { type: 'array' },     // array of strings for the genres of the song
+  lyrics: { type: 'string', textSearch: true }, // the full lyrics of the song
+  music: { type: 'string', textSearch: true },  // who wrote the music for the song
+  year: { type: 'number' },      // the year the song was releases
+  duration: { type: 'number' },  // the duration of the song in seconds
+  link: { type: 'string' }       // link to a YouTube video of the song
 }, {
-  dataStructure: 'JSON'
+  dataStructure: 'JSON' // change this to HASH (or just ommit it) if you want to store in HASHes instead
 })
 
 let client = new Client()
 await client.open()
 
-let songRepository = new Repository(schema, client)
+export let songRepository = new Repository(schema, client)
 
 try {
   await songRepository.dropIndex()
@@ -49,5 +49,3 @@ try {
 }
 
 await songRepository.createIndex()
-
-export { Song, songRepository }
