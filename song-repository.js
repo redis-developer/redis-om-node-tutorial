@@ -42,10 +42,5 @@ await client.open()
 
 export let songRepository = new Repository(schema, client)
 
-try {
-  await songRepository.dropIndex()
-} catch (error) {
-  /* sorry, not sorry */
-}
-
+await songRepository.dropIndex()
 await songRepository.createIndex()
