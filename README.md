@@ -1,4 +1,4 @@
-# Up and Running Quickly with Express and Redis OM for Node.js in 5-minutes
+# Up and Running with Express and Redis OM for Node.js in 5-minutes
 
 OK. So that title is a bold claim. And this is a read-and-follow-along sort of tutorial. So, it might be 6 minutes or 4 minutes depending on how fast you type. Regardless, this should get you building something useful quickly and could make a nice foundation for something bigger.
 
