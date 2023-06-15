@@ -35,7 +35,7 @@ Give it a name, version, and description. Use whatever you like. I called mine "
 Install [Express](https://expressjs.com/) and Redis OM for Node.js:
 
 ```bash
-$ npm install express redis-om --save
+$ npm install express redis-om@beta --save
 ```
 
 And, just to make our lives easy, we'll use [nodemon](https://nodemon.io/):
@@ -81,11 +81,11 @@ Now, you should have a `package.json` that looks something like this:
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "express": "^4.17.1",
-    "redis-om": "^0.2.0"
+    "express": "^4.17.3",
+    "redis-om": "^0.4.0-beta.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.14"
+    "nodemon": "^2.0.22"
   }
 }
 ```
