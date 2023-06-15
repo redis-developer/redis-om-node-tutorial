@@ -18,23 +18,31 @@ Fortunately, my buddy [Dylan Beattie](https://dylanbeattie.net/) is literally th
 
 We're using Redis as our database—that's the whole idea behind Redis OM. So, you'll need some Redis, specifically with [RediSearch][redisearch-url] and [RedisJSON][redis-json-url] installed. The easiest way to do this is to set up a free [Redis Cloud][redis-cloud-url] instance. But, you can also use Docker:
 
-    $ docker run -p 6379:6379 redislabs/redismod:preview
+```bash
+$ docker run -p 6379:6379 redis/redis-stack:latest
+```
 
-I'm assuming you are relatively Node.js savvy so you should be able to get that installed on your own. We'll be using the _top-level await_ feature for modules that was introduced in Node v14.8.0 so do make sure you have that version, or a newer one. If you don't, go and get it.
+I'm assuming you are relatively Node.js savvy so you should be able to get that installed on your own. We'll be using the _top-level await_ feature for modules that was introduced in Node.js v14.8.0 so do make sure you have that version, or a newer one. If you don't, go and get it.
 
 Once you have that, it's time to create a project:
 
-    $ npm init
+```bash
+$ npm init
+```
 
 Give it a name, version, and description. Use whatever you like. I called mine "Metalpedia".
 
 Install [Express](https://expressjs.com/) and Redis OM for Node.js:
 
-    $ npm install express redis-om --save
+```bash
+$ npm install express redis-om --save
+```
 
 And, just to make our lives easy, we'll use [nodemon](https://nodemon.io/):
 
-    $ npm install nodemon --save-dev
+```bash
+$ npm install nodemon --save-dev
+```
 
 Now that stuff is installed, let's set up some other details in our `package.json`. First, set the "type" to "module", so we can use ES6 Modules:
 
@@ -111,7 +119,9 @@ app.listen(8080)
 
 We now have enough to actually run something. So let's run it:
 
-    $ npm start
+```bash
+$ npm start
+```
 
 Then, hit `http://localhost:8080/` in your favorite browser. You should see something like this:
 
@@ -122,13 +132,15 @@ Then, hit `http://localhost:8080/` in your favorite browser. You should see some
 }
 ```
 
-Or, hit your service using `curl` (and `json_pp` if you want to be fancy):
+Or, hit your service using `curl` (and [`jq`](https://jqlang.github.io/jq/) if you want to be fancy):
 
-    $ curl -X GET http://localhost:8080 -s | json_pp
-    {
-      "name": "metalpedia",
-      "version": "1.0.0"
-    }
+```bash
+$ curl -X GET http://localhost:8080 -s | jq
+{
+  "name": "metalpedia",
+  "version": "1.0.0"
+}
+```
 
 Cool. Let's add some Redis.
 
@@ -266,20 +278,24 @@ Now that we have a way to shove songs into Redis, let's start shoving. Out on Gi
 
 Let's use `curl` to load in a song. I'm partial to [_HTML_](https://www.youtube.com/watch?v=woKUEIJkwxI), sung to the tune of AC/DC's _Highway to Hell_, so let's use that one:
 
-    $ curl -X PUT -H "Content-Type: application/json" -d "@songs/html.json" http://localhost:8080/song -s | json_pp
+```bash
+$ curl -X PUT -H "Content-Type: application/json" -d "@songs/html.json" http://localhost:8080/song -s | jq
+```
 
 You should get back the ID of that newly inserted song:
 
 ```json
-  {
-    "id" : "01FKRW9WMVXTGF71NBEM3EBRPY"
-  }
+{
+  "id" : "01FKRW9WMVXTGF71NBEM3EBRPY"
+}
 ```
 
 We're shipping HTML indeed. If you have the `redis-cli` handy—or want to use [RedisInsight](https://redis.com/redis-enterprise/redis-insight/)—you can take a look and see how Redis has stored this:
 
-    > json.get Song:01FKRW9WMVXTGF71NBEM3EBRPY
-    "{\"title\":\"HTML\",\"artist\":\"Dylan Beattie and the Linebreakers\",\"genres\":[\"blues rock\",\"hard rock\",\"parody\",\"rock\"],\"lyrics\":\"W3C, RFC, a JIRA ticket and a style guide.\\\\nI deploy with FTP, run it all on the client side\\\\nDon\xe2\x80\x99t need Ruby, don\xe2\x80\x99t need Rails,\\\\nAin\xe2\x80\x99t nothing running on my stack\\\\nI\xe2\x80\x99m hard wired, for web scale,\\\\nYeah, I\xe2\x80\x99m gonna bring the 90s back\\\\n\\\\nI\xe2\x80\x99m shipping HTML,\\\\nHTML,\\\\nI\xe2\x80\x99m shipping HTML,\\\\nHTML\xe2\x80\xa6\\\\n\\\\nNo logins, no trackers,\\\\nNo cookie banners to ignore\\\\nI ain\xe2\x80\x99t afraid of, no hackers\\\\nJust the occasional 404\\\\nThey hatin\xe2\x80\x99, what I do,\\\\nBut that\xe2\x80\x99s \xe2\x80\x98cos they don\xe2\x80\x99t understand\\\\nMark it up, break it down,\\\\nRemember to escape your ampersands\xe2\x80\xa6\\\\n\\\\nI\xe2\x80\x99m shipping HTML,\\\\nHTML,\\\\nI\xe2\x80\x99m shipping HTML,\\\\nHTML\xe2\x80\xa6\\\\n\\\\n(But it\xe2\x80\x99s really just markdown.)\",\"music\":\"\\\"Highway to Hell\\\" by AC/DC\",\"year\":2020,\"duration\":220,\"link\":\"https://www.youtube.com/watch?v=woKUEIJkwxI\"}"
+```bash
+> json.get Song:01FKRW9WMVXTGF71NBEM3EBRPY
+"{\"title\":\"HTML\",\"artist\":\"Dylan Beattie and the Linebreakers\",\"genres\":[\"blues rock\",\"hard rock\",\"parody\",\"rock\"],\"lyrics\":\"W3C, RFC, a JIRA ticket and a style guide.\\\\nI deploy with FTP, run it all on the client side\\\\nDon\xe2\x80\x99t need Ruby, don\xe2\x80\x99t need Rails,\\\\nAin\xe2\x80\x99t nothing running on my stack\\\\nI\xe2\x80\x99m hard wired, for web scale,\\\\nYeah, I\xe2\x80\x99m gonna bring the 90s back\\\\n\\\\nI\xe2\x80\x99m shipping HTML,\\\\nHTML,\\\\nI\xe2\x80\x99m shipping HTML,\\\\nHTML\xe2\x80\xa6\\\\n\\\\nNo logins, no trackers,\\\\nNo cookie banners to ignore\\\\nI ain\xe2\x80\x99t afraid of, no hackers\\\\nJust the occasional 404\\\\nThey hatin\xe2\x80\x99, what I do,\\\\nBut that\xe2\x80\x99s \xe2\x80\x98cos they don\xe2\x80\x99t understand\\\\nMark it up, break it down,\\\\nRemember to escape your ampersands\xe2\x80\xa6\\\\n\\\\nI\xe2\x80\x99m shipping HTML,\\\\nHTML,\\\\nI\xe2\x80\x99m shipping HTML,\\\\nHTML\xe2\x80\xa6\\\\n\\\\n(But it\xe2\x80\x99s really just markdown.)\",\"music\":\"\\\"Highway to Hell\\\" by AC/DC\",\"year\":2020,\"duration\":220,\"link\":\"https://www.youtube.com/watch?v=woKUEIJkwxI\"}"
+```
 
 Yep. Looks like JSON.
 
@@ -290,7 +306,7 @@ Create down, let's add a GET route to read this song from HTTP instead of using 
 ```javascript
 router.get('/:id', async (req, res) => {
 
-  // fetch the Song 
+  // fetch the Song
   let song = await repository.fetch(req.params.id)
 
   // return the Song we just fetched
@@ -301,7 +317,9 @@ router.get('/:id', async (req, res) => {
 
 Now you can use `curl` or your browser to load `http://localhost:8080/song/01FKRW9WMVXTGF71NBEM3EBRPY` to fetch the song:
 
-    $ curl -X GET http://localhost:8080/song/01FKRW9WMVXTGF71NBEM3EBRPY -s | json_pp
+```bash
+$ curl -X GET http://localhost:8080/song/01FKRW9WMVXTGF71NBEM3EBRPY -s | jq
+```
 
 And you should get back the JSON for the song:
 
@@ -328,7 +346,7 @@ Now that we can read and write, let's implement the *REST* of the HTTP verbs. RE
 
 ### Add an Update Route
 
-Here's the code to update using a POST route. You'll note this code is nearly identical to the GET route. Feel free to refactor to a helper function but since this is just a tutorial, I'll skip that for now.:
+Here's the code to update using a POST route. You'll note this code is nearly identical to the GET route. Feel free to refactor to a helper function but since this is just a tutorial, I'll skip that for now:
 
 ```javascript
 router.post('/:id', async (req, res) => {
@@ -357,13 +375,17 @@ router.post('/:id', async (req, res) => {
 
 And the `curl` command to try it out, replacing Dylan's _HTML_ with _D.M.C.A._—sung to the tune of _Y.M.C.A._ by the Village People:
 
-    $ curl -X POST -H "Content-Type: application/json" -d "@songs/d-m-c-a.json" http://localhost:8080/song/01FKRW9WMVXTGF71NBEM3EBRPY -s | json_pp
+```bash
+$ curl -X POST -H "Content-Type: application/json" -d "@songs/d-m-c-a.json" http://localhost:8080/song/01FKRW9WMVXTGF71NBEM3EBRPY -s | jq
+```
 
 You should get back the ID of that updated song:
 
-    {
-      "id" : "01FKRW9WMVXTGF71NBEM3EBRPY"
-    }
+```json
+{
+  "id" : "01FKRW9WMVXTGF71NBEM3EBRPY"
+}
+```
 
 ### Add a Delete Route
 
@@ -383,8 +405,10 @@ router.delete('/:id', async (req, res) => {
 
 And test it out:
 
-    $ curl -X DELETE http://localhost:8080/song/01FKRW9WMVXTGF71NBEM3EBRPY -s
-    OK
+```bash
+$ curl -X DELETE http://localhost:8080/song/01FKRW9WMVXTGF71NBEM3EBRPY -s
+OK
+```
 
 This just returns "OK", which is technically JSON but aside from the response header, is indistinguishable from plain text.
 
@@ -402,24 +426,28 @@ All the CRUD is done. Let's add some search. Search is where Redis OM really sta
 
 Before we get started, let's load up Redis with a bunch of songs—so we have stuff to search for. I've written a short shell script that loads all the song data on GitHub into Redis using the server we just made. It just calls `curl` in a loop. It's on GitHub, so go [grab it](https://github.com/redis-developer/redis-om-node-tutorial/blob/main/load-data.sh) and put it in your project root. Then run it:
 
-    $ ./load-data.sh
+```bash
+$ ./load-data.sh
+```
 
 You should get something like:
 
-    {"id":"01FM310A8AVVM643X13WGFQ2AR"} <- songs/big-rewrite.json
-    {"id":"01FM310A8Q07D6S7R3TNJB146W"} <- songs/bug-in-the-javascript.json
-    {"id":"01FM310A918W0JCQZ8E57JQJ07"} <- songs/d-m-c-a.json
-    {"id":"01FM310A9CMJGQHMHY01AP0SG4"} <- songs/enterprise-waterfall.json
-    {"id":"01FM310A9PA6DK4P4YR275M58X"} <- songs/flatscreens.json
-    {"id":"01FM310AA2XTEQV2NZE3V7K3M7"} <- songs/html.json
-    {"id":"01FM310AADVHEZXF7769W6PQZW"} <- songs/lost-it-on-the-blockchain.json
-    {"id":"01FM310AASNA81Y9ACFMCGP05P"} <- songs/meetup-2020.json
-    {"id":"01FM310AB4M2FKTDPGEEMM3VTV"} <- songs/re-bass.json
-    {"id":"01FM310ABFGFYYJXVABX2YXGM3"} <- songs/teams.json
-    {"id":"01FM310ABW0ANYSKN9Q1XEP8BJ"} <- songs/tech-sales.json
-    {"id":"01FM310AC6H4NRCGDVFMKNGKK3"} <- songs/these-are-my-own-devices.json
-    {"id":"01FM310ACH44414RMRHPCVR1G8"} <- songs/were-gonna-build-a-framework.json
-    {"id":"01FM310ACV8C72Y69VDQHA12C1"} <- songs/you-give-rest-a-bad-name.json
+```bash
+{"id":"01FM310A8AVVM643X13WGFQ2AR"} <- songs/big-rewrite.json
+{"id":"01FM310A8Q07D6S7R3TNJB146W"} <- songs/bug-in-the-javascript.json
+{"id":"01FM310A918W0JCQZ8E57JQJ07"} <- songs/d-m-c-a.json
+{"id":"01FM310A9CMJGQHMHY01AP0SG4"} <- songs/enterprise-waterfall.json
+{"id":"01FM310A9PA6DK4P4YR275M58X"} <- songs/flatscreens.json
+{"id":"01FM310AA2XTEQV2NZE3V7K3M7"} <- songs/html.json
+{"id":"01FM310AADVHEZXF7769W6PQZW"} <- songs/lost-it-on-the-blockchain.json
+{"id":"01FM310AASNA81Y9ACFMCGP05P"} <- songs/meetup-2020.json
+{"id":"01FM310AB4M2FKTDPGEEMM3VTV"} <- songs/re-bass.json
+{"id":"01FM310ABFGFYYJXVABX2YXGM3"} <- songs/teams.json
+{"id":"01FM310ABW0ANYSKN9Q1XEP8BJ"} <- songs/tech-sales.json
+{"id":"01FM310AC6H4NRCGDVFMKNGKK3"} <- songs/these-are-my-own-devices.json
+{"id":"01FM310ACH44414RMRHPCVR1G8"} <- songs/were-gonna-build-a-framework.json
+{"id":"01FM310ACV8C72Y69VDQHA12C1"} <- songs/you-give-rest-a-bad-name.json
+```
 
 Note that this script will not erase any data. So any songs that you have in there already will still be there, alongside these. And if you run this script more than once, it will gleefully add the songs a second time.
 
@@ -476,8 +504,9 @@ router.get('/', async (req, res) => {
 
 Then try it out with `curl` or your browser:
 
-    $ curl -X GET http://localhost:8080/songs -s | json_pp
-
+```bash
+$ curl -X GET http://localhost:8080/songs -s | jq
+```
 
 We can search for a specific field by calling `.where` and `.eq`. This route finds all songs by a particular artist. Note that you must specify the complete name of the artist for this to work:
 
@@ -491,7 +520,9 @@ router.get('/by-artist/:artist', async (req, res) => {
 
 Then try it out with `curl` or your browser too:
 
-    $ curl -X GET http://localhost:8080/songs/by-artist/Dylan%20Beattie -s | json_pp
+```bash
+$ curl -X GET http://localhost:8080/songs/by-artist/Dylan%20Beattie -s | jq
+```
 
 Genres are stored as an array of strings. You can use `.contains` to see if the array contains that genre or not:
 
@@ -505,8 +536,10 @@ router.get('/by-genre/:genre', async (req, res) => {
 
 And try it out:
 
-    $ curl -X GET http://localhost:8080/songs/by-genre/rock -s | json_pp
-    $ curl -X GET http://localhost:8080/songs/by-genre/parody -s | json_pp
+```bash
+$ curl -X GET http://localhost:8080/songs/by-genre/rock -s | jq
+$ curl -X GET http://localhost:8080/songs/by-genre/parody -s | jq
+```
 
 This route lets you get all the songs between two years. Great for finding all those 80s hits. Of course, all of Dylan's songs are more recent than that, so we'll go a little more narrow when we try it out:
 
@@ -521,7 +554,9 @@ router.get('/between-years/:start-:stop', async (req, res) => {
 
 And, try it out, of course:
 
-    $ curl -X GET http://localhost:8080/songs/between-years/2020-2021 -s | json_pp
+```bash
+$ curl -X GET http://localhost:8080/songs/between-years/2020-2021 -s | jq
+```
 
 Let's add the final route to find songs that have certain words in the lyrics using `.match`:
 
@@ -535,7 +570,9 @@ router.get('/with-lyrics/:lyrics', async (req, res) => {
 
 We can try this out too, getting all the songs that contain both the words "html" and "markdown":
 
-    $ curl -X GET http://localhost:8080/songs/with-lyrics/html%20markdown -s | json_pp
+```bash
+$ curl -X GET http://localhost:8080/songs/with-lyrics/html%20markdown -s | jq
+```
 
 ## Wrapping Up
 
