@@ -3,7 +3,7 @@ import { router as songRouter } from './song-router.js'
 import { router as songsRouter } from './songs-router.js'
 
 // create an express app and use JSON
-let app = new express()
+const app = new express()
 app.use(express.json())
 
 // bring in some routers

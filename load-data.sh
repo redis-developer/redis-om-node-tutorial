@@ -1,5 +1,5 @@
 for f in songs/*
 do
-  curl -X PUT -H "Content-Type: application/json" -d "@$f" localhost:8080/song
+  curl -X POST -H "Content-Type: application/json" -d "@$f" localhost:8080/songs
   echo " <- $f"
 done

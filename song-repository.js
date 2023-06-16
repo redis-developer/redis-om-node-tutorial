@@ -1,8 +1,7 @@
-import { Client, Entity, Schema } from 'redis-om'
+import { Schema, Repository } from 'redis-om'
+import { redis } from './redis.js'
 
-class Song extends Entity {}
-
-let schema = new Schema(Song, {
+const schema = new Schema('song', {
   title: { type: 'string' },     // the title of the song
   artist: { type: 'string' },    // who performed the song
   genres: { type: 'string[]' },  // array of strings for the genres of the song
@@ -13,8 +12,6 @@ let schema = new Schema(Song, {
   link: { type: 'string' }       // link to a YouTube video of the song
 })
 
-let client = await new Client().open()
-
-export let songRepository = client.fetchRepository(schema)
+export const songRepository = new Repository(schema, redis)
 
 await songRepository.createIndex()
