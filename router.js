@@ -3,7 +3,7 @@ import { EntityId } from 'redis-om'
 
 import { songRepository as repository } from './repository.js'
 
-export let router = Router()
+export const router = Router()
 
 router.put('/song/:id', async (req, res) => {
 
