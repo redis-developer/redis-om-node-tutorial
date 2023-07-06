@@ -35,7 +35,7 @@ Give it a name, version, and description. Use whatever you like. I called mine "
 Install [Express][express], [Node Redis][node-redis], and [Redis OM][redis-om]:
 
 ```bash
-$ npm install express redis redis-om@beta --save
+$ npm install express redis redis-om
 ```
 
 And, just to make our lives easy, we'll use [nodemon][nodemon]:
@@ -83,7 +83,7 @@ Now, you should have a `package.json` that looks something like this:
   "dependencies": {
     "express": "^4.17.3",
     "redis": "^4.6.7",
-    "redis-om": "^0.4.0-beta.3"
+    "redis-om": "^0.4.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
